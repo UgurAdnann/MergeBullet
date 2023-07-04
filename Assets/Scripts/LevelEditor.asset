@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0140dd2363d50cf4ba11a58458ac4bc2, type: 3}
+  m_Name: LevelEditor
+  m_EditorClassIdentifier: 
+  bulletDatas:
+  - name: Level 1
+    hitValue: 1
+    type: 1
+    prefab: {fileID: 1000011023395326, guid: e853bf397ced7b146973811e8aea8044, type: 3}
+  - name: Level 2
+    hitValue: 3
+    type: 2
+    prefab: {fileID: 1000012871492402, guid: 02209c8d5bcd55c498184d08665e8acf, type: 3}
+  - name: Level 3
+    hitValue: 7
+    type: 3
+    prefab: {fileID: 1000010122379484, guid: eeaaa85514cb6f34980fd53544523d8f, type: 3}
+  - name: Level 4
+    hitValue: 15
+    type: 4
+    prefab: {fileID: 1000011831654914, guid: e8512b584ed5c2945b86a3d34dd84d34, type: 3}
+  - name: Level 5
+    hitValue: 31
+    type: 5
+    prefab: {fileID: 1000012348821626, guid: aee86ebfe38758e4680b1247290fda06, type: 3}
+  - name: Level 6
+    hitValue: 63
+    type: 6
+    prefab: {fileID: 1000011919393272, guid: ee43fb17d0a27cf47a2f555a1b5f7145, type: 3}
+  - name: Level 7
+    hitValue: 127
+    type: 7
+    prefab: {fileID: 1000013858407736, guid: 9c17f93d2eac6bc4a8df2aea64746e85, type: 3}
+  gridRow: 4
+  gridColumn: 5
+  gridStartPoint: {x: -2, y: 3, z: 0}
+  money: 300
+  bulletPrice: 100
+  CreateingBulletType: 1
