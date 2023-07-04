@@ -5,13 +5,13 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public Vector2 pos;
-    public int bulletType,hitValue;
+    public int bulletType, hitValue;
 
     Vector3 worldPosition;
     private bool isOnTouch;
 
     public GameManager gameManager;
-    private GridController currentGridController, targetGridController;
+    [HideInInspector] public GridController currentGridController, targetGridController;
     private BulletController targetBulletController;
     private GridCreator gridCreator;
 
@@ -67,13 +67,14 @@ public class BulletController : MonoBehaviour
         }
         else
         {
-            if (targetGridController.bulletType.Equals(targetGridController.bulletType)) //Merge
+            if (bulletType.Equals(targetGridController.bulletType)) //Merge
             {
                 targetBulletController = targetGridController.transform.GetChild(0).GetComponent<BulletController>();
-                gameManager.Merge(this, targetBulletController);
+                if (bulletType < gameManager.levelEditor.bulletDatas.Length)
+                    gameManager.Merge(this, targetBulletController);
             }
             else //Move Ýnitial Place
-            transform.localPosition = Vector3.zero;
+                transform.localPosition = Vector3.zero;
         }
     }
 
@@ -93,5 +94,5 @@ public class BulletController : MonoBehaviour
         currentGridController.bulletType = 0;
     }
 
-   
+
 }
