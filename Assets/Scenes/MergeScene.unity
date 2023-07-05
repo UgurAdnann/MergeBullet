@@ -1412,6 +1412,9 @@ MonoBehaviour:
   dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
   moneyText: {fileID: 1336902857}
   bulletPriceText: {fileID: 1157988020}
+  normalButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  uselessButtonColor: {r: 0.066037714, g: 0.06441792, b: 0.06441792, a: 0.5058824}
+  bulletButton: {fileID: 244762163}
 --- !u!1 &2101534985
 GameObject:
   m_ObjectHideFlags: 0

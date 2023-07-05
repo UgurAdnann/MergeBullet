@@ -4,6 +4,6 @@ using UnityEngine;
 public class EventManager 
 {
     #region CanvasManagerEvents
-    public static Action SetMoneyText;
+    public static Action<int> SetMoneyText;
     #endregion
 }

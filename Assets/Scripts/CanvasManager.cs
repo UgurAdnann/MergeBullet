@@ -5,17 +5,25 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
+    #region variables for General
     private GridCreator gridCreator;
-
     public LevelEditor levelEditor;
     private GameManager gameManager;
     public DataBase dataBase;
+    #endregion
+
+    #region Variables for Canvas
     public Text moneyText, bulletPriceText;
     private int money;
+    public Color normalButtonColor, uselessButtonColor;
+    public Button bulletButton;
+    #endregion
 
+    #region Variables for Bullet
     private GameObject tempBullet, tempgrid;
     private GridController gridController;
     private BulletController bulletController;
+    #endregion
 
     private void OnEnable()
     {
@@ -34,13 +42,19 @@ public class CanvasManager : MonoBehaviour
         gameManager = ObjectManager.GameManager;
 
         money = dataBase.money;
-        SetMoneyText();
+        SetMoneyText(0);
         SetBulletPrice();
     }
 
-    private void SetMoneyText()
+    #region Canvas Settings
+    private void SetMoneyText(int addMoney)
     {
+        money += addMoney;
+        dataBase.money = money;
+
         moneyText.text = money.ToString();
+
+        SetButtonColor();
     }
 
     private void SetBulletPrice()
@@ -48,21 +62,35 @@ public class CanvasManager : MonoBehaviour
         bulletPriceText.text = levelEditor.bulletPrice.ToString();
     }
 
+    private void SetButtonColor()
+    {
+        if (money >= levelEditor.bulletPrice)
+            bulletButton.GetComponent<Image>().color = normalButtonColor;
+        else
+            bulletButton.GetComponent<Image>().color = uselessButtonColor;
+
+    }
+    #endregion
+
+    #region BulletSettings
     public void AddBullet()
     {
         if (gridCreator.emptyGrids.Count > 0 && money >= levelEditor.bulletPrice)
         {
             int rndGrid = Random.Range(0, gridCreator.emptyGrids.Count);
 
+            //Create Bullet
             tempBullet = Instantiate(levelEditor.bulletDatas[levelEditor.CreateingBulletType - 1].prefab);
             bulletController = tempBullet.GetComponent<BulletController>();
             tempgrid = gridCreator.emptyGrids[rndGrid];
             gridController = tempgrid.GetComponent<GridController>();
 
+            //Set grid properties
             gridController.bulletType = levelEditor.bulletDatas[levelEditor.CreateingBulletType - 1].type;
             gridCreator.emptyGrids.Remove(tempgrid);
             gridController.gridSit = GridSit.Fill;
 
+            //Set bullet properties
             tempBullet.transform.SetParent(tempgrid.transform);
             tempBullet.transform.localPosition = Vector3.zero;
             bulletController.gridNum = gridCreator.grids.IndexOf(tempgrid);
@@ -71,11 +99,9 @@ public class CanvasManager : MonoBehaviour
 
             gameManager.bullets.Add(bulletController);
 
-
-            money -= levelEditor.bulletPrice;
-            dataBase.money = money;
-            SetMoneyText();
+            SetMoneyText(-levelEditor.bulletPrice);
             gameManager.SaveSystem();
         }
     }
+    #endregion
 }

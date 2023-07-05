@@ -8,13 +8,4 @@ public class GridController : MonoBehaviour
     public int bulletType,gridNum;
     public GridSit gridSit;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

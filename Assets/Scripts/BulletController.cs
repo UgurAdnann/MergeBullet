@@ -24,6 +24,7 @@ public class BulletController : MonoBehaviour
     {
         gridCreator = ObjectManager.GridCreator;
         gameManager = ObjectManager.GameManager;
+
         currentGridController = transform.parent.GetComponent<GridController>();
     }
 
@@ -43,7 +44,7 @@ public class BulletController : MonoBehaviour
         PutDown();
     }
 
-    private void MoveObject()
+    private void MoveObject() //Drag control system
     {
         if (isOnTouch)
         {
@@ -63,12 +64,13 @@ public class BulletController : MonoBehaviour
         currentGridController = transform.parent.GetComponent<GridController>();
         if (targetGridController.gridSit.Equals(GridSit.Empty)) //Empty Movement
         {
-
+            //Grid Events
             ResetGrid();
             gridCreator.emptyGrids.Remove(targetGridController.gameObject);
             targetGridController.gridSit = GridSit.Fill;
             targetGridController.bulletType = bulletType;
 
+            //Bullet Events
             transform.SetParent(targetGridController.transform);
             transform.localPosition = Vector3.zero;
         }
