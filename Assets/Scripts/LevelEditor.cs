@@ -18,6 +18,7 @@ public class LevelEditor : ScriptableObject
 
     public int gridRow,gridColumn;
     public Vector3 gridStartPoint;
-    public int money;
     public int bulletPrice,CreateingBulletType;
+
+    public int StartMoney;
 }

@@ -47,10 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c153e2e1620daff4ba10eb56883c14c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: {x: 0, y: 0}
   bulletType: 0
   hitValue: 0
-  gameManager: {fileID: 0}
+  gridNum: 0
   currentGridController: {fileID: 0}
   targetGridController: {fileID: 0}
 --- !u!136 &8230071638918265658
@@ -63,10 +62,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.10646262
-  m_Height: 0.46057874
+  m_Radius: 0.1728839
+  m_Height: 0.61757445
   m_Direction: 1
-  m_Center: {x: -0.003728576, y: -0.09661275, z: 0}
+  m_Center: {x: -0.0037285686, y: -0.07044678, z: -0.006038308}
 --- !u!54 &-4822808497025562730
 Rigidbody:
   m_ObjectHideFlags: 0

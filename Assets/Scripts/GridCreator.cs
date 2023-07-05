@@ -15,9 +15,6 @@ public class GridCreator : MonoBehaviour
     private void Awake()
     {
         ObjectManager.GridCreator = this;
-    }
-    void Start()
-    {
         gridsparent = GameObject.FindGameObjectWithTag("GridsParent").transform;
         CreateGrids();
     }
@@ -32,8 +29,8 @@ public class GridCreator : MonoBehaviour
                 tempGrid.transform.SetParent(gridsparent);
                 tempGrid.transform.position = Vector3.zero;
                 tempGrid.transform.position = levelEditor.gridStartPoint + new Vector3(j, -i, 0)*tempGrid.transform.localScale.x*2;
-                tempGrid.GetComponent<GridController>().pos = new Vector2(j, -i);
                 grids.Add(tempGrid);
+                tempGrid.GetComponent<GridController>().gridNum = grids.IndexOf(tempGrid);
                 emptyGrids.Add(tempGrid);
             }
         }

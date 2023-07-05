@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 819045359}
   - component: {fileID: 819045360}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,6 +669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEditor: {fileID: 11400000, guid: c16e8f1d6395c40428b3b1e99de28c60, type: 2}
+  dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
+  bullets: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1407,6 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEditor: {fileID: 11400000, guid: c16e8f1d6395c40428b3b1e99de28c60, type: 2}
+  dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
   moneyText: {fileID: 1336902857}
   bulletPriceText: {fileID: 1157988020}
 --- !u!1 &2101534985

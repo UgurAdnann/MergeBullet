@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GridController : MonoBehaviour
 {
-    public Vector2 pos;
-    public int bulletType;
+
+    public int bulletType,gridNum;
     public GridSit gridSit;
 
     void Start()

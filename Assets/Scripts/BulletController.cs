@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public Vector2 pos;
-    public int bulletType, hitValue;
+    #region Variables for General
+    private GameManager gameManager;
+    private GridCreator gridCreator;
+    #endregion
 
+    #region Variables for Properties
+    public int bulletType, hitValue,gridNum;
+    #endregion
+
+    #region Variables for Movement
     Vector3 worldPosition;
     private bool isOnTouch;
-
-    public GameManager gameManager;
-    [HideInInspector] public GridController currentGridController, targetGridController;
     private BulletController targetBulletController;
-    private GridCreator gridCreator;
-
-    private void OnMouseDown()
-    {
-        isOnTouch = true;
-    }
-    private void OnMouseUp()
-    {
-        isOnTouch = false;
-        PutDown();
-    }
+    [HideInInspector] public GridController currentGridController, targetGridController;
+    #endregion
 
     private void Start()
     {
@@ -36,6 +31,18 @@ public class BulletController : MonoBehaviour
     {
         MoveObject();
     }
+
+    #region Movement
+    private void OnMouseDown()
+    {
+        isOnTouch = true;
+    }
+    private void OnMouseUp()
+    {
+        isOnTouch = false;
+        PutDown();
+    }
+
     private void MoveObject()
     {
         if (isOnTouch)
@@ -76,15 +83,9 @@ public class BulletController : MonoBehaviour
             else //Move Ýnitial Place
                 transform.localPosition = Vector3.zero;
         }
-    }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Grid"))
-        {
-            targetGridController = other.GetComponent<GridController>();
-        }
+        gridNum = transform.parent.GetSiblingIndex();
+        gameManager.SaveSystem();
     }
 
     public void ResetGrid()
@@ -93,6 +94,15 @@ public class BulletController : MonoBehaviour
         gridCreator.emptyGrids.Add(currentGridController.gameObject);
         currentGridController.bulletType = 0;
     }
+    #endregion
 
-
+    #region Collision
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Grid"))
+        {
+            targetGridController = other.GetComponent<GridController>();
+        }
+    }
+    #endregion
 }
