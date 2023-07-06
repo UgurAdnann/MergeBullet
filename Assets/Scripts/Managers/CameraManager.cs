@@ -7,7 +7,12 @@ public class CameraManager : MonoBehaviour
     private Vector3 targetDistance;
     public float followSpeed;
     public Transform target;
-    private bool isFollow;
+    public bool isFollow;
+
+    private void Awake()
+    {
+        ObjectManager.CameraManager = this;
+    }
 
     void Start()
     {

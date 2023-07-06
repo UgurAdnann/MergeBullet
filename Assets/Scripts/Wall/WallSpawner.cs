@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
+    #region Variables for General
+    private LevelManager levelManager;
+    private PlayerManager playerManager;
+    #endregion
+    #region Variables for Character
+    public GameObject character;
+    public Transform charactersparent;
+    #endregion
     #region Variables for Walls
     public GameObject[] walls;
     public int column;
@@ -20,19 +28,14 @@ public class WallSpawner : MonoBehaviour
         wallsParent = GameObject.FindGameObjectWithTag("WallsParent").transform;
     }
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
 
     #region WallSpawn
     //triggerred from GameBulletSpawnerSc
     public void SpawnWall()
     {
+            levelManager = ObjectManager.LevelManager;
+        playerManager = ObjectManager.PlayerManager;
+
         for (int i = 0; i < row; i++)
         {
             for (int j = 0; j < column; j++)
@@ -49,6 +52,16 @@ public class WallSpawner : MonoBehaviour
                 //Set wall Pos
                 tempWall.transform.SetParent(wallsParent);
                 tempWall.transform.position = startPos + new Vector3(j * 2, 0, i*1.5f);
+
+                //SetCharacters
+                if (i == row - 1)
+                {
+                    GameObject tempChar = Instantiate(character);
+                    tempChar.transform.SetParent(charactersparent);
+                    tempChar.transform.position = startPos + new Vector3(j * 2, 0, i + 10);
+                    levelManager.characterList.Add(tempChar.GetComponent<CharacterManager>());
+                    playerManager.transform.position =  new Vector3(0, 0, startPos.z+i + 20);
+                }
 
             }
         }

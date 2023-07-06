@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSaves:
   - type: 1
-    GridNum: 11
-  - type: 1
-    GridNum: 18
-  - type: 1
-    GridNum: 19
-  money: 1000
+    GridNum: 8
+    hp: 5
+    pos: {x: 3, y: -1}
+  money: 800

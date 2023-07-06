@@ -9,6 +9,7 @@ TagManager:
   - GridsParent
   - WallsParent
   - Bullet
+  - Character
   layers:
   - Default
   - TransparentFX

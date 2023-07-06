@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
     #region Variables for General
     private GameManager gameManager;
     private GridCreator gridCreator;
+    private LevelManager levelManager;
     #endregion
 
     #region Variables for Properties
@@ -26,7 +27,12 @@ public class BulletController : MonoBehaviour
     {
         gridCreator = ObjectManager.GridCreator;
         gameManager = ObjectManager.GameManager;
+    }
 
+    private void OnEnable()
+    {
+        levelManager = ObjectManager.LevelManager;
+        
     }
 
 
@@ -111,6 +117,12 @@ public class BulletController : MonoBehaviour
         if (other.CompareTag("Grid"))
         {
             targetGridController = other.GetComponent<GridController>();
+        }
+        if (other.CompareTag("Character"))
+        {
+            levelManager.StartCharacterMovement();
+            other.GetComponent<CharacterManager>().isPlay = true;
+            Destroy(this.gameObject);
         }
     }
     #endregion

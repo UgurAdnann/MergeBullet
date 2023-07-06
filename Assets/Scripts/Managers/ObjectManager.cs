@@ -8,6 +8,9 @@ public static class ObjectManager
     public static GameManager GameManager;
     public static WallSpawner wallSpawner;
     public static PoolingManager PoolingManager;
+    public static LevelManager LevelManager;
+    public static PlayerManager PlayerManager;
+    public static CameraManager CameraManager;
     #endregion
 
 

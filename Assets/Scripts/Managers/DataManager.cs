@@ -18,7 +18,6 @@ public class DataManager
             SaveData(dataBase);
             return;
         }
-
         string dataString = PlayerPrefs.GetString("data");
         JsonUtility.FromJsonOverwrite(dataString, dataBase);
     }

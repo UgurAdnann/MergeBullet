@@ -14,7 +14,7 @@ public class DataBase : ScriptableObject
         public Vector2 pos;
     }
 
-    public List<BulletSave>  bulletSaves=new List<BulletSave>();
+    public List<BulletSave> bulletSaves = new List<BulletSave>();
     [Header( "Click R to Reset Data")]
     public int money;
 }
