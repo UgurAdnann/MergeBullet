@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
             gridCreator.grids[dataBase.bulletSaves[i].GridNum].GetComponent<GridController>().gridSit = GridSit.Fill;
             gridCreator.emptyGrids.Remove(gridCreator.grids[dataBase.bulletSaves[i].GridNum]);
 
-            SaveSystem();
         }
     }
 
@@ -107,7 +106,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("data");
             dataBase.bulletSaves.Clear();
             dataBase.money = levelEditor.StartMoney;
-            //DataManager.SaveData(dataBase);
+            DataManager.SaveData(dataBase);
         }
     }
 
@@ -116,7 +115,7 @@ public class GameManager : MonoBehaviour
         dataBase.bulletSaves.Clear();
         for (int i = 0; i < bullets.Count; i++)
         {
-            dataBase.bulletSaves.Add(new DataBase.BulletSave { type = bullets[i].bulletType, GridNum = bullets[i].gridNum, pos = bullets[i].pos, hp = bullets[i].hp });
+            dataBase.bulletSaves.Add(new DataBase.BulletSave { type = bullets[i].bulletType, GridNum = bullets[i].gridNum, pos = bullets[i].pos, hp = bullets[i].hp,hitValue = bullets[i].hitValue });
         }
         DataManager.SaveData(dataBase);
     }

@@ -17,7 +17,8 @@ public class PoolingObjectController : MonoBehaviour
     {
         transform.position = pos;
         gameObject.SetActive(true);
-        StartCoroutine(WaitCloseObject());
+        if (poolingType != PoolingType.Bullet)
+            StartCoroutine(WaitCloseObject());
     }
 
     private IEnumerator WaitCloseObject()

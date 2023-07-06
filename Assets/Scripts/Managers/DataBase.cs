@@ -11,6 +11,7 @@ public class DataBase : ScriptableObject
         public int type;
         public int GridNum;
         public int hp;
+        public int hitValue;
         public Vector2 pos;
     }
 

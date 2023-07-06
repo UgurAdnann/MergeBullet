@@ -11,28 +11,32 @@ public class BulletController : MonoBehaviour
     #endregion
 
     #region Variables for Properties
-    public int bulletType, hitValue, gridNum,hp;
+    public int bulletType, hitValue, gridNum, hp;
     public Vector2 pos;
-    public bool isUnbeatable;
+    public bool isUnbeatable, isGameBullet;
     #endregion
 
     #region Variables for Movement
     Vector3 worldPosition;
-    private bool isOnTouch;
+    private bool isOnTouch,isFire;
     private BulletController targetBulletController;
     [HideInInspector] public GridController currentGridController, targetGridController;
+    private Rigidbody rigidbody;
+    public float bulletSpeed;
     #endregion
 
     private void Start()
     {
         gridCreator = ObjectManager.GridCreator;
         gameManager = ObjectManager.GameManager;
+
     }
 
     private void OnEnable()
     {
+        rigidbody = GetComponent<Rigidbody>();
         levelManager = ObjectManager.LevelManager;
-        
+
     }
 
 
@@ -44,17 +48,22 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         MoveObject();
+        Fire();
     }
 
     #region Movement
     private void OnMouseDown()
     {
-        isOnTouch = true;
+        if (!isGameBullet)
+            isOnTouch = true;
     }
     private void OnMouseUp()
     {
-        isOnTouch = false;
-        PutDown();
+        if (!isGameBullet)
+        {
+            isOnTouch = false;
+            PutDown();
+        }
     }
 
     private void MoveObject() //Drag control system
@@ -86,6 +95,7 @@ public class BulletController : MonoBehaviour
             //Bullet Events
             transform.SetParent(targetGridController.transform);
             transform.localPosition = Vector3.zero;
+            pos = targetGridController.pos;
         }
         else
         {
@@ -109,6 +119,20 @@ public class BulletController : MonoBehaviour
         gridCreator.emptyGrids.Add(currentGridController.gameObject);
         currentGridController.bulletType = 0;
     }
+
+    public void ForwardMovement(int hit)
+    {
+        hitValue = hit;
+        isFire = true;
+    }
+
+    private void Fire()
+    {
+        if (isFire)
+        {
+            transform.Translate(transform.forward * -bulletSpeed * Time.deltaTime);  //15
+        }
+    }
     #endregion
 
     #region Collision
@@ -120,7 +144,8 @@ public class BulletController : MonoBehaviour
         }
         if (other.CompareTag("Character"))
         {
-            levelManager.StartCharacterMovement();
+            other.GetComponent<CharacterManager>().hitValue += hitValue;
+            levelManager.StartCharacterMovement(this);
             other.GetComponent<CharacterManager>().isPlay = true;
             Destroy(this.gameObject);
         }

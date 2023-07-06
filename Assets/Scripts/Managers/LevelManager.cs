@@ -10,12 +10,17 @@ public class LevelManager : MonoBehaviour
     public DataBase dataBase;
     private PlayerManager playerManager;
     private CameraManager cameraManager;
+    private GameManager gameManager;
     #endregion
 
     #region Variables for CharacterMovement
     private bool isStartCharacterMovement;
-    private StartBullets startBullets;
     public List<CharacterManager> characterList = new List<CharacterManager>();
+    public Transform camPos;
+    #endregion
+
+    #region Variables for Fire
+    private StartBullets startBullets;
     private int GunNum;
     #endregion
 
@@ -28,19 +33,21 @@ public class LevelManager : MonoBehaviour
     {
         playerManager = ObjectManager.PlayerManager;
         cameraManager = ObjectManager.CameraManager;
+        gameManager = ObjectManager.GameManager;
 
     }
 
     public void StartGame()
     {
         DataManager.SaveData(dataBase);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (gameManager.bullets.Count > 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
     }
 
 
     #region StartCharacter Movement
-    public void StartCharacterMovement()
+    public void StartCharacterMovement(BulletController sc)
     {
         if (!isStartCharacterMovement)
         {
@@ -51,11 +58,18 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator WaitCharacterMovement()
     {
-        yield return new WaitForSeconds(0.2f);
-            startBullets = GameObject.FindGameObjectWithTag("StartBulletsParent").GetComponent<StartBullets>();
+        cameraManager.isFollow = false;
+        yield return new WaitForSeconds(0.75f);
+        //Set cam Settings
+        cameraManager.transform.DOMove(camPos.position, 0.95f);
+        cameraManager. transform.DORotate(camPos.transform.eulerAngles, 0.75f);
+
+        //Set Bullet Settings
+        startBullets = GameObject.FindGameObjectWithTag("StartBulletsParent").GetComponent<StartBullets>();
         startBullets.isMoveForward = false;
         startBullets.gameObject.SetActive(false);
-        cameraManager.isFollow = false;
+
+        //Set Chaarcter Settings
         for (int i = characterList.Count - 1; i >= 0; i--)
         {
             if (characterList[i].isPlay)
@@ -63,8 +77,12 @@ public class LevelManager : MonoBehaviour
                 characterList[i].transform.SetParent(playerManager.transform.GetChild(0));
                 characterList[i].transform.DOMove(playerManager.transform.GetChild(1).GetChild(GunNum).position, 0.95f);
                 GunNum++;
+                characterList[i].GetComponent<Collider>().enabled = false;
             }
         }
+        yield return new WaitForSeconds(1);
+        cameraManager.SetTarget(playerManager.transform);
+        playerManager.StartMove();
     }
     #endregion
 }

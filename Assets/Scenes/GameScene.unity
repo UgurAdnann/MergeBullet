@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &198245169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 198245170}
+  m_Layer: 0
+  m_Name: CamPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &198245170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198245169}
+  m_LocalRotation: {x: 0.18081933, y: -0, z: -0, w: 0.9835164}
+  m_LocalPosition: {x: 1.1, y: 11.3, z: -18.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815693493}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 20.835, y: 0, z: 0}
 --- !u!1 &215383988
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
   characterList: []
+  camPos: {fileID: 198245170}
 --- !u!1 &887171190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1209,7 @@ Transform:
   m_Children:
   - {fileID: 1445271388}
   - {fileID: 752101313}
+  - {fileID: 198245170}
   m_Father: {fileID: 1252602413}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1193,6 +1225,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f85506de274424180cb7452cbc423b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTouch: 0
+  isCanMove: 0
+  forwardSpeed: 0
+  sideSpeed: 0
+  isStartPanelClose: 0
+  initialSideSpeed: 20
+  initialForwardSpeed: 10
+  distance: 0
+  isTriple: 0
+  fireRate: 0
 --- !u!1 &1960571991
 GameObject:
   m_ObjectHideFlags: 0

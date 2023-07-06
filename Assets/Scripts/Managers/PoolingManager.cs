@@ -20,6 +20,7 @@ public class PoolingManager : MonoBehaviour
     {
         CubeFxPooling();
         BulletFxPooling();
+        BulletPooling();
     }
 
     #region CubePoolingEvents
@@ -82,7 +83,7 @@ public class PoolingManager : MonoBehaviour
 
      private void BulletPooling()
     {
-        for (int i = 0; i < bulletQue.Count; i++)
+        for (int i = 0; i < bulletCount; i++)
         {
             tempBullet = Instantiate(bullet);
             tempBullet.transform.SetParent(transform.GetChild(2)); //Bullet Parent

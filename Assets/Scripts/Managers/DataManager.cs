@@ -12,9 +12,9 @@ public class DataManager
     }
     public static void LoadData(DataBase dataBase)
     {
+            Debug.Log("Load");
         if (!PlayerPrefs.HasKey("data"))
         {
-            Debug.Log("Load");
             SaveData(dataBase);
             return;
         }

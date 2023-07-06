@@ -33,7 +33,7 @@ public class WallSpawner : MonoBehaviour
     //triggerred from GameBulletSpawnerSc
     public void SpawnWall()
     {
-            levelManager = ObjectManager.LevelManager;
+        levelManager = ObjectManager.LevelManager;
         playerManager = ObjectManager.PlayerManager;
 
         for (int i = 0; i < row; i++)
@@ -51,16 +51,16 @@ public class WallSpawner : MonoBehaviour
 
                 //Set wall Pos
                 tempWall.transform.SetParent(wallsParent);
-                tempWall.transform.position = startPos + new Vector3(j * 2, 0, i*1.5f);
+                tempWall.transform.position = startPos + new Vector3(j * 2, 0, i * 1.5f);
 
                 //SetCharacters
                 if (i == row - 1)
                 {
                     GameObject tempChar = Instantiate(character);
                     tempChar.transform.SetParent(charactersparent);
-                    tempChar.transform.position = startPos + new Vector3(j * 2, 0, i + 10);
+                    tempChar.transform.position = tempWall.transform.position + Vector3.forward * 10;
                     levelManager.characterList.Add(tempChar.GetComponent<CharacterManager>());
-                    playerManager.transform.position =  new Vector3(0, 0, startPos.z+i + 20);
+                    playerManager.transform.position = new Vector3(0, 0, tempWall.transform.position.z + 20);
                 }
 
             }

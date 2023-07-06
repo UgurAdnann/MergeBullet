@@ -43,6 +43,8 @@ public class GameBulletSpawner : MonoBehaviour
             tempBulletController.bulletType = dataBase.bulletSaves[i].type;
             tempBulletController.hp = dataBase.bulletSaves[i].hp;
             tempBulletController.pos = dataBase.bulletSaves[i].pos;
+            tempBulletController.hitValue = dataBase.bulletSaves[i].hitValue;
+            tempBulletController.isGameBullet = true;
 
             //Select Unbeatable bullet
             if (unbeatableBullet == null)

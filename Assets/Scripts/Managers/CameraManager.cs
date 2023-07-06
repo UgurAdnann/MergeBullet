@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
     private Vector3 targetDistance;
     public float followSpeed;
     public Transform target;
+    private Transform firstTarget;
     public bool isFollow;
 
     private void Awake()
@@ -16,7 +17,13 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("StartBulletsParent").transform;
+        firstTarget = GameObject.FindGameObjectWithTag("StartBulletsParent").transform;
+        SetTarget(firstTarget);
+    }
+
+    public void SetTarget(Transform tr)
+    {
+        target = tr;
 
         targetDistance = transform.position - target.transform.position;
         isFollow = true;
