@@ -10,7 +10,9 @@ public class BulletController : MonoBehaviour
     #endregion
 
     #region Variables for Properties
-    public int bulletType, hitValue,gridNum;
+    public int bulletType, hitValue, gridNum,hp;
+    public Vector2 pos;
+    public bool isUnbeatable;
     #endregion
 
     #region Variables for Movement
@@ -25,6 +27,11 @@ public class BulletController : MonoBehaviour
         gridCreator = ObjectManager.GridCreator;
         gameManager = ObjectManager.GameManager;
 
+    }
+
+
+    public void GetGridController()
+    {
         currentGridController = transform.parent.GetComponent<GridController>();
     }
 
@@ -104,6 +111,16 @@ public class BulletController : MonoBehaviour
         if (other.CompareTag("Grid"))
         {
             targetGridController = other.GetComponent<GridController>();
+        }
+    }
+    #endregion
+
+    #region Destroy Events
+    public void DestroyEvent()
+    {
+        if (!isUnbeatable)
+        {
+            Destroy(this.gameObject);
         }
     }
     #endregion

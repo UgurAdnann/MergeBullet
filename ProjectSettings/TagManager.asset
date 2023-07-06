@@ -4,8 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GridsParent
   - Grid
+  - StartBulletsParent
+  - GridsParent
+  - WallsParent
+  - Bullet
   layers:
   - Default
   - TransparentFX

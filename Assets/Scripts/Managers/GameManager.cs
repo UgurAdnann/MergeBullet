@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         ResetData();
     }
 
-    #region Variables for Bullets
+    #region  Bullets Events
     public void CreateBullets()
     {
         for (int i = 0; i < dataBase.bulletSaves.Count; i++)
@@ -44,17 +44,22 @@ public class GameManager : MonoBehaviour
             currentBulletController = currentBullet.GetComponent<BulletController>();
             currentBullet.transform.SetParent(gridCreator.grids[dataBase.bulletSaves[i].GridNum].transform);
             currentBullet.transform.localPosition = Vector3.zero;
+            currentBulletController.GetGridController();
 
             //Set bullet properties
             bullets.Add(currentBulletController);
             currentBulletController.bulletType = levelEditor.bulletDatas[dataBase.bulletSaves[i].type - 1].type;
             currentBulletController.hitValue = levelEditor.bulletDatas[dataBase.bulletSaves[i].type - 1].hitValue;
+            currentBulletController.hp = levelEditor.bulletDatas[dataBase.bulletSaves[i].type - 1].hp;
             currentBulletController.gridNum = dataBase.bulletSaves[i].GridNum;
+            currentBulletController.GetGridController();
+            currentBulletController.pos = currentBulletController.currentGridController.pos;
 
             //Set Grid Settings
             gridCreator.grids[dataBase.bulletSaves[i].GridNum].GetComponent<GridController>().bulletType = currentBulletController.bulletType;
             gridCreator.grids[dataBase.bulletSaves[i].GridNum].GetComponent<GridController>().gridSit = GridSit.Fill;
             gridCreator.emptyGrids.Remove(gridCreator.grids[dataBase.bulletSaves[i].GridNum]);
+
         }
     }
 
@@ -67,14 +72,18 @@ public class GameManager : MonoBehaviour
         currentBulletController = currentBullet.GetComponent<BulletController>();
         bullets.Add(currentBulletController);
 
+        //Set bullet pos
+        currentBulletController.transform.SetParent(secondBullet.transform.parent);
+        currentBulletController.transform.localPosition = Vector3.zero;
+        currentBulletController.GetGridController();
+
         //Set bullet properties
         currentBulletController.gridNum = secondBullet.gridNum;
         currentBulletController.bulletType = levelEditor.bulletDatas[firstBullet.bulletType].type;
         currentBulletController.hitValue = levelEditor.bulletDatas[firstBullet.bulletType].hitValue;
+        currentBulletController.hp = levelEditor.bulletDatas[firstBullet.bulletType].hp;
+        currentBulletController.pos = secondBullet.currentGridController.pos;
 
-        //Set bullet pos
-        currentBulletController.transform.SetParent(secondBullet.transform.parent);
-        currentBulletController.transform.localPosition = Vector3.zero;
 
         //Set current grid properties
         secondBullet.currentGridController.bulletType = currentBulletController.bulletType;
@@ -85,11 +94,11 @@ public class GameManager : MonoBehaviour
         Destroy(firstBullet.gameObject);
         Destroy(secondBullet.gameObject);
 
-        SaveSystem();
+        //SaveSystem();
     }
     #endregion
 
-    #region Variables for SaveSytem
+    #region SaveSytem Events
     private void ResetData()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -105,7 +114,7 @@ public class GameManager : MonoBehaviour
         dataBase.bulletSaves.Clear();
         for (int i = 0; i < bullets.Count; i++)
         {
-            dataBase.bulletSaves.Add(new DataBase.BulletSave { type = bullets[i].bulletType, GridNum = bullets[i].gridNum });
+            dataBase.bulletSaves.Add(new DataBase.BulletSave { type = bullets[i].bulletType, GridNum = bullets[i].gridNum, pos = bullets[i].pos,hp=bullets[i].hp });
         }
 
         DataManager.SaveData(dataBase);

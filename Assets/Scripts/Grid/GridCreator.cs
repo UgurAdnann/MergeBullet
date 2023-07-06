@@ -40,6 +40,7 @@ public class GridCreator : MonoBehaviour
                 //Set grid properties
                 grids.Add(tempGrid);
                 tempGrid.GetComponent<GridController>().gridNum = grids.IndexOf(tempGrid);
+                tempGrid.GetComponent<GridController>().pos = new Vector2(j, -i);
                 emptyGrids.Add(tempGrid);
             }
         }

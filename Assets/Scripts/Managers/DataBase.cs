@@ -10,6 +10,8 @@ public class DataBase : ScriptableObject
     {
         public int type;
         public int GridNum;
+        public int hp;
+        public Vector2 pos;
     }
 
     public List<BulletSave>  bulletSaves=new List<BulletSave>();

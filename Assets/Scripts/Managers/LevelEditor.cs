@@ -11,6 +11,7 @@ public class LevelEditor : ScriptableObject
         public string name;
         public int hitValue;
         public int type;
+        public int hp;
         public GameObject prefab;
     }
 

@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: -7215621037742894981}
   m_Layer: 0
   m_Name: Bullet7
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,6 +164,9 @@ MonoBehaviour:
   bulletType: 0
   hitValue: 0
   gridNum: 0
+  hp: 0
+  pos: {x: 0, y: 0}
+  isUnbeatable: 0
   currentGridController: {fileID: 0}
   targetGridController: {fileID: 0}
 --- !u!136 &-8595617504431900350

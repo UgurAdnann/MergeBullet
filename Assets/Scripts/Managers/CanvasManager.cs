@@ -96,6 +96,9 @@ public class CanvasManager : MonoBehaviour
             bulletController.gridNum = gridCreator.grids.IndexOf(tempgrid);
             bulletController.bulletType = levelEditor.CreateingBulletType;
             bulletController.hitValue = levelEditor.bulletDatas[levelEditor.CreateingBulletType - 1].hitValue;
+            bulletController.hp = levelEditor.bulletDatas[levelEditor.CreateingBulletType - 1].hp;
+            bulletController.pos = gridController.pos;
+            bulletController.GetGridController();
 
             gameManager.bullets.Add(bulletController);
 
