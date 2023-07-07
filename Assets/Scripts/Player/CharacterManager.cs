@@ -25,7 +25,6 @@ public class CharacterManager : MonoBehaviour
         levelManager = ObjectManager.LevelManager;
 
         animator = GetComponent<Animator>();
-        animator.SetBool("Idle", false);
 
         StartCoroutine(WaitFire());
     }

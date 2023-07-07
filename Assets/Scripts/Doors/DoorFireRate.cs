@@ -33,6 +33,8 @@ public class DoorFireRate : DoorController
         if (other.CompareTag("Bullet"))
         {
             tempBulletController = other.GetComponent<BulletController>();
+            tempBulletController.ReplaceQue();
+           
             //SetFireRate
             addFireRate += tempBulletController.hitValue;
             valueText.text = addFireRate.ToString();

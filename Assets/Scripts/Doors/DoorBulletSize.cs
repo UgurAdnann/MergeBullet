@@ -38,6 +38,8 @@ public class DoorBulletSize : DoorController
         if (other.CompareTag("Bullet"))
         {
             tempBulletController = other.GetComponent<BulletController>();
+            tempBulletController.ReplaceQue();
+
             //SetBulletSize
             addBulletSize += tempBulletController.hitValue;
             valueText.text = addBulletSize.ToString();

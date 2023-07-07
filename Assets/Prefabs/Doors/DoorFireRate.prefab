@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48350829633779893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -5, y: -2.25, z: 86.5}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 2564919753585821169}
   - {fileID: 1290862584173164311}
@@ -58,7 +58,7 @@ MonoBehaviour:
   doorBG: {fileID: 8528037360770487507}
   tempBulletController: {fileID: 0}
   addFireRate: 0
-  minFireRate: 0.1
+  minFireRate: 0.05
   maxFireRate: 1.2
   positiveTextBGMat: {fileID: 2100000, guid: b3cccfbb953725c4184c88574b2e2aa1, type: 2}
   negativeTextBGMat: {fileID: 2100000, guid: 97043ae9c1ab2004993f7127b113c4a3, type: 2}

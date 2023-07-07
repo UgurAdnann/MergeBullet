@@ -30,6 +30,8 @@ public class DoorBulletRange : DoorController
         if (other.CompareTag("Bullet"))
         {
             tempBulletController = other.GetComponent<BulletController>();
+            tempBulletController.ReplaceQue();
+
             //SetRange
             addRange += tempBulletController.hitValue;
             valueText.text = addRange.ToString();

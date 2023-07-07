@@ -20,13 +20,6 @@ public class DoorTripleShot : DoorController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bullet"))
-        {
-            tempBulletController = other.GetComponent<BulletController>();
-
-            tempBulletController.ReplaceQue();
-        }
-
         if (other.CompareTag("Player"))
         {
             CloseCollider();

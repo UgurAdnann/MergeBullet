@@ -36,9 +36,11 @@ public class BulletController : MonoBehaviour
     private void OnEnable()
     {
         levelManager = ObjectManager.LevelManager;
-        transform.localScale = Vector3.one * levelManager.bulletSize;
         if (isGunBullet)
+        {
+            transform.localScale = Vector3.one * levelManager.bulletSize;
             StopBullet = StartCoroutine(WaitStopBullet());
+        }
     }
 
 
@@ -149,9 +151,9 @@ public class BulletController : MonoBehaviour
             transform.Translate(transform.forward * -bulletSpeed * Time.deltaTime);
 
         else if (isRightTripleFire)
-            transform.Translate(Vector3.Normalize(transform.forward + transform.right*0.2f) * -bulletSpeed * Time.deltaTime);
+            transform.Translate(Vector3.Normalize(transform.forward + transform.right * 0.2f) * -bulletSpeed * Time.deltaTime);
         else if (isLeftTripleFire)
-            transform.Translate(Vector3.Normalize(transform.forward - transform.right*0.2f) * -bulletSpeed * Time.deltaTime);
+            transform.Translate(Vector3.Normalize(transform.forward - transform.right * 0.2f) * -bulletSpeed * Time.deltaTime);
 
     }
     #endregion

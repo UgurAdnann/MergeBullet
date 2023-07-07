@@ -65,6 +65,7 @@ public class WallSpawner : MonoBehaviour
 
             }
         }
+        levelManager.DesignLevel(playerManager.transform.position);
     }
     #endregion
 }
