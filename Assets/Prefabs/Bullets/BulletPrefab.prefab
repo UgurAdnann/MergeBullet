@@ -54,7 +54,8 @@ MonoBehaviour:
   hp: 0
   pos: {x: 0, y: 0}
   isUnbeatable: 0
-  isGameBullet: 1
+  isGameBullet: 0
+  isGunBullet: 1
   currentGridController: {fileID: 0}
   targetGridController: {fileID: 0}
   bulletSpeed: 20

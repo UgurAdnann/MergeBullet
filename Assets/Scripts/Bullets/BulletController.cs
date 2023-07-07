@@ -8,35 +8,36 @@ public class BulletController : MonoBehaviour
     private GameManager gameManager;
     private GridCreator gridCreator;
     private LevelManager levelManager;
+    private PoolingManager poolingManager;
     #endregion
 
     #region Variables for Properties
     public int bulletType, hitValue, gridNum, hp;
     public Vector2 pos;
-    public bool isUnbeatable, isGameBullet;
+    public bool isUnbeatable, isGameBullet, isGunBullet;
     #endregion
 
     #region Variables for Movement
     Vector3 worldPosition;
-    private bool isOnTouch,isFire;
+    private bool isOnTouch, isFire;
     private BulletController targetBulletController;
     [HideInInspector] public GridController currentGridController, targetGridController;
-    private Rigidbody rigidbody;
     public float bulletSpeed;
+    Coroutine StopBullet = null;
     #endregion
 
     private void Start()
     {
         gridCreator = ObjectManager.GridCreator;
         gameManager = ObjectManager.GameManager;
-
+        poolingManager = ObjectManager.PoolingManager;
     }
 
     private void OnEnable()
     {
-        rigidbody = GetComponent<Rigidbody>();
         levelManager = ObjectManager.LevelManager;
-
+        if (isGunBullet)
+            StopBullet = StartCoroutine(WaitStopBullet());
     }
 
 
@@ -124,6 +125,7 @@ public class BulletController : MonoBehaviour
     {
         hitValue = hit;
         isFire = true;
+        StartCoroutine(WaitStopBullet());
     }
 
     private void Fire()
@@ -149,6 +151,10 @@ public class BulletController : MonoBehaviour
             other.GetComponent<CharacterManager>().isPlay = true;
             Destroy(this.gameObject);
         }
+        if (other.CompareTag("BulletRange"))
+        {
+            ReplaceQue();
+        }
     }
     #endregion
 
@@ -159,6 +165,19 @@ public class BulletController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void ReplaceQue()
+    {
+        isFire = false;
+        StopCoroutine(StopBullet);
+     
+        poolingManager.replacingBullet(transform.gameObject);
+    }
+    IEnumerator WaitStopBullet()
+    {
+        yield return new WaitForSeconds(3);
+        ReplaceQue();
     }
     #endregion
 }

@@ -28,7 +28,5 @@ public class PoolingObjectController : MonoBehaviour
             poolingManager.replacingCubeDestroyFx(transform.gameObject);
         else if (poolingType.Equals(PoolingType.BulletDestroyFx))
             poolingManager.replacingBulletDestroyFx(transform.gameObject);
-        else if (poolingType.Equals(PoolingType.Bullet))
-            poolingManager.replacingBullet(transform.gameObject);
     }
 }

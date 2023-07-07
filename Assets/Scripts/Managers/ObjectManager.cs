@@ -11,6 +11,7 @@ public static class ObjectManager
     public static LevelManager LevelManager;
     public static PlayerManager PlayerManager;
     public static CameraManager CameraManager;
+    public static BulletRangeSettings BulletRangeSettings;
     #endregion
 
 

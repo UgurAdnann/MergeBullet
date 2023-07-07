@@ -1102,6 +1102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
+  characterList: []
+  camPos: {fileID: 0}
 --- !u!1 &1336902855
 GameObject:
   m_ObjectHideFlags: 0

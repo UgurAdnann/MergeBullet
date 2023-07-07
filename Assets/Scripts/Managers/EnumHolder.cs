@@ -13,3 +13,11 @@ public enum PoolingType
     BulletDestroyFx,
     Bullet
 }
+
+public enum DoorType
+{
+    BulletRange,
+    BulletSize,
+    FireRate,
+    TripleShot
+}

@@ -10,6 +10,8 @@ TagManager:
   - WallsParent
   - Bullet
   - Character
+  - Door
+  - BulletRange
   layers:
   - Default
   - TransparentFX
