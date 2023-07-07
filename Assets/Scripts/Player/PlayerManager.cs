@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     #region Variables for Fire
     public int distance;
-    public bool isTriple;
+    public bool isTripleShot;
     public float fireRate;
     #endregion
 

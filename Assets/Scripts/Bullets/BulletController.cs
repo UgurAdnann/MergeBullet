@@ -19,7 +19,7 @@ public class BulletController : MonoBehaviour
 
     #region Variables for Movement
     Vector3 worldPosition;
-    private bool isOnTouch, isFire;
+    private bool isOnTouch, isForwardFire, isRightTripleFire, isLeftTripleFire;
     private BulletController targetBulletController;
     [HideInInspector] public GridController currentGridController, targetGridController;
     public float bulletSpeed;
@@ -36,6 +36,7 @@ public class BulletController : MonoBehaviour
     private void OnEnable()
     {
         levelManager = ObjectManager.LevelManager;
+        transform.localScale = Vector3.one * levelManager.bulletSize;
         if (isGunBullet)
             StopBullet = StartCoroutine(WaitStopBullet());
     }
@@ -124,16 +125,34 @@ public class BulletController : MonoBehaviour
     public void ForwardMovement(int hit)
     {
         hitValue = hit;
-        isFire = true;
+        isForwardFire = true;
+        StartCoroutine(WaitStopBullet());
+    }
+
+    public void TripleRightMovement(int hit)
+    {
+        hitValue = hit;
+        isRightTripleFire = true;
+        StartCoroutine(WaitStopBullet());
+    }
+
+    public void TripleLeftMovement(int hit)
+    {
+        hitValue = hit;
+        isLeftTripleFire = true;
         StartCoroutine(WaitStopBullet());
     }
 
     private void Fire()
     {
-        if (isFire)
-        {
-            transform.Translate(transform.forward * -bulletSpeed * Time.deltaTime);  //15
-        }
+        if (isForwardFire)
+            transform.Translate(transform.forward * -bulletSpeed * Time.deltaTime);
+
+        else if (isRightTripleFire)
+            transform.Translate(Vector3.Normalize(transform.forward + transform.right*0.2f) * -bulletSpeed * Time.deltaTime);
+        else if (isLeftTripleFire)
+            transform.Translate(Vector3.Normalize(transform.forward - transform.right*0.2f) * -bulletSpeed * Time.deltaTime);
+
     }
     #endregion
 
@@ -169,9 +188,11 @@ public class BulletController : MonoBehaviour
 
     public void ReplaceQue()
     {
-        isFire = false;
+        isForwardFire = false;
+        isRightTripleFire = false;
+        isLeftTripleFire = false;
         StopCoroutine(StopBullet);
-     
+
         poolingManager.replacingBullet(transform.gameObject);
     }
     IEnumerator WaitStopBullet()

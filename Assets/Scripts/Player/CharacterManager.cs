@@ -6,6 +6,7 @@ public class CharacterManager : MonoBehaviour
 {
     #region Variables for General
     private PlayerManager playerManager;
+    private LevelManager levelManager;
     private PoolingManager poolingManager;
     private Animator animator;
     #endregion
@@ -21,8 +22,10 @@ public class CharacterManager : MonoBehaviour
     {
         playerManager = ObjectManager.PlayerManager;
         poolingManager = ObjectManager.PoolingManager;
+        levelManager = ObjectManager.LevelManager;
 
         animator = GetComponent<Animator>();
+        animator.SetBool("Idle", false);
 
         StartCoroutine(WaitFire());
     }
@@ -37,9 +40,9 @@ public class CharacterManager : MonoBehaviour
         if (isPlay)
         {
             if (Input.GetMouseButtonDown(0))
-                animator.SetTrigger("Run");
+                animator.SetBool("Run", true);
             if (Input.GetMouseButtonUp(0))
-                animator.SetTrigger("Idle");
+                animator.SetBool("Run", false);
         }
     }
 
@@ -51,9 +54,24 @@ public class CharacterManager : MonoBehaviour
             tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
             tempbulletController.ForwardMovement(hitValue);
 
-            yield return new WaitForSeconds(1);
+            if (playerManager.isTripleShot)
+            {
+                //Right Bullet
+                tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
+                tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+                tempbulletController.TripleRightMovement(hitValue);
+
+                //LeftBullet Bullet
+                tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
+                tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+                tempbulletController.TripleLeftMovement(hitValue);
+
+            }
+
+
+            yield return new WaitForSeconds(levelManager.fireRate);
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         StartCoroutine(WaitFire());
     }
 }

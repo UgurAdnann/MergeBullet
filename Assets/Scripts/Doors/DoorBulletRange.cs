@@ -43,9 +43,11 @@ public class DoorBulletRange : DoorController
 
         if (other.CompareTag("Player"))
         {
-            print("Player");
+            CloseCollider();
+
             //Change BulletRange
             bulletRangeSettings.transform.localPosition += Vector3.forward * (addRange / 10);
+
             //Set Min Range
             if (bulletRangeSettings.transform.localPosition.z < minRange)
                 bulletRangeSettings.transform.localPosition = new Vector3(0, 0, minRange);

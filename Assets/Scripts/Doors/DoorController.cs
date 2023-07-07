@@ -11,6 +11,7 @@ public class DoorController : MonoBehaviour
     public bool isPositive;
     private int rnd;
     private bool isFirstColor;
+    private Vector3 startSize;
     #endregion
 
     #region Variables for  door Object
@@ -53,12 +54,18 @@ public class DoorController : MonoBehaviour
         if (!isPositive)
             value = 0 - value;
         valueText.text = value.ToString();
+        startSize = valueText.transform.localScale;
         return value;
     }
 
     public void ValueTextAnim()
     {
         DOTween.Complete(this);
-        valueText.transform.DOPunchScale(valueText.transform.localScale * 1.1f,0.1f);
+        valueText.transform.DOScale(startSize * 1.5f, 0.05f).OnStepComplete(() => valueText.transform.DOScale(startSize, 0.05f));
+    }
+
+    public void CloseCollider()
+    {
+        GetComponent<Collider>().enabled = false;
     }
 }

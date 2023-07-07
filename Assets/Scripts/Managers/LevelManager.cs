@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     #region Variables for Fire
     private StartBullets startBullets;
     private int GunNum;
+    public float bulletSize,fireRate;
     #endregion
 
     private void Awake()

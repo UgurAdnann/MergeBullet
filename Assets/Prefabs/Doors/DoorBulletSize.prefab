@@ -51,12 +51,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorType: 0
   doorName: Bullet Size
-  valueText: {fileID: 3910566924848540220}
   isPositive: 0
+  valueText: {fileID: 3910566924848540220}
   nameText: {fileID: 7469451084385491143}
   textBG: {fileID: 4195994423769263441}
   doorBG: {fileID: 8528037360770487507}
+  tempBulletController: {fileID: 0}
+  levelManager: {fileID: 0}
   addBulletSize: 0
+  minBulletSize: 0.5
+  maxBulletSize: 5.5
   positiveTextBGMat: {fileID: 2100000, guid: b3cccfbb953725c4184c88574b2e2aa1, type: 2}
   negativeTextBGMat: {fileID: 2100000, guid: 97043ae9c1ab2004993f7127b113c4a3, type: 2}
   positiveDoorBGMat: {fileID: 2100000, guid: 782f1c2ca7ba14d4793dce6ce7aa8f55, type: 2}
