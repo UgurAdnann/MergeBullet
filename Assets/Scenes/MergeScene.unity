@@ -154,6 +154,8 @@ Transform:
   - {fileID: 705507995}
   - {fileID: 1987711144}
   - {fileID: 139559714}
+  - {fileID: 1318658864}
+  - {fileID: 819045359}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -386,8 +388,6 @@ Transform:
   m_Children:
   - {fileID: 735431088}
   - {fileID: 2129090061}
-  - {fileID: 819045359}
-  - {fileID: 1318658864}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -650,12 +650,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819045358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 475173722}
-  m_RootOrder: 2
+  m_Father: {fileID: 35492827}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &819045360
 MonoBehaviour:
@@ -1068,6 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1318658864}
   - component: {fileID: 1318658865}
+  - component: {fileID: 1318658866}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1082,12 +1083,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318658863}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 475173722}
-  m_RootOrder: 3
+  m_Father: {fileID: 35492827}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1318658865
 MonoBehaviour:
@@ -1104,6 +1105,36 @@ MonoBehaviour:
   dataBase: {fileID: 11400000, guid: 9d9f6f640200a054aba9a5fb9b362056, type: 2}
   characterList: []
   camPos: {fileID: 0}
+  bulletSize: 0
+  fireRate: 0
+  playerStartPos: {x: 0, y: 0, z: 0}
+  finishLine: {fileID: 0}
+  plane: {fileID: 0}
+  doorsParent: {fileID: 0}
+  doorNum: 0
+  doorDistance: 0
+  doors: []
+  boxsParent: {fileID: 0}
+  boxNum: 0
+  boxDistance: 0
+  boxHp: 0
+  boxPrefab: {fileID: 0}
+  goldValue: 75
+  WinPanel: {fileID: 0}
+  moneyText: {fileID: 0}
+--- !u!114 &1318658866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318658863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71aeba77b3121df49b3d8f0cd5361c4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limit: 60
 --- !u!1 &1336902855
 GameObject:
   m_ObjectHideFlags: 0

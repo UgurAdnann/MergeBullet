@@ -11,7 +11,8 @@ public enum PoolingType
 {
     CubeDestroyFx,
     BulletDestroyFx,
-    Bullet
+    Bullet,
+    MoneyText
 }
 
 public enum DoorType

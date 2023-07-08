@@ -17,7 +17,9 @@ public class PoolingObjectController : MonoBehaviour
     {
         transform.position = pos;
         gameObject.SetActive(true);
-        if (poolingType != PoolingType.Bullet)
+        if (poolingType.Equals(PoolingType.MoneyText))
+            GetComponent<MoneyTextFxController>().OpenEvent();
+        if (!poolingType.Equals( PoolingType.Bullet))
             StartCoroutine(WaitCloseObject());
     }
 
@@ -28,5 +30,7 @@ public class PoolingObjectController : MonoBehaviour
             poolingManager.replacingCubeDestroyFx(transform.gameObject);
         else if (poolingType.Equals(PoolingType.BulletDestroyFx))
             poolingManager.replacingBulletDestroyFx(transform.gameObject);
+        else if(poolingType.Equals(PoolingType.MoneyText))
+            poolingManager.replacingMoneyText(transform.gameObject);
     }
 }

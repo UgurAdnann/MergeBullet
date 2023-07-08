@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    #region Variables for General
+    private LevelManager levelManager;
+    public DataBase dataBase;
+    private PoolingManager poolingManager;
+    #endregion
     #region Input
-    [HideInInspector] public bool isTouch, isCanMove;
+    public bool isTouch, isCanMove, isFirstTouch;
     private float xDifference;
     [HideInInspector] public float forwardSpeed, sideSpeed;
     [HideInInspector] public bool isStartPanelClose;
@@ -14,9 +19,8 @@ public class PlayerManager : MonoBehaviour
     #endregion
 
     #region Variables for Fire
-    public int distance;
     public bool isTripleShot;
-    public float fireRate;
+    public int collectedMoney;
     #endregion
 
 
@@ -27,14 +31,24 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
+        levelManager = ObjectManager.LevelManager;
+        poolingManager = ObjectManager.PoolingManager;
+
         forwardSpeed = initialForwardSpeed;
         sideSpeed = initialSideSpeed;
     }
 
     void Update()
     {
+
         if (isCanMove)
-            InputListener();
+        {
+            if (Input.GetMouseButtonDown(0))
+                isFirstTouch = true;
+
+            if (isFirstTouch)
+                InputListener();
+        }
     }
     #region Input
     private void InputListener()
@@ -63,7 +77,7 @@ public class PlayerManager : MonoBehaviour
             firstTouch = Input.mousePosition;
         }
 
-        
+
         if (Input.GetMouseButtonUp(0))
         {
             isTouch = false;
@@ -74,5 +88,40 @@ public class PlayerManager : MonoBehaviour
     public void StartMove()
     {
         isCanMove = true;
+    }
+
+    private void EndGameEvents()
+    {
+        isCanMove = false;
+        isTouch = false;
+
+        //Set Characters Anim
+        for (int i = 0; i < transform.GetChild(0).childCount; i++)
+        {
+            transform.GetChild(0).GetChild(i).GetComponent<Animator>().SetBool("Run", false);
+        }
+        dataBase.highScore = transform.position.z;
+        levelManager.OpenWinPanel(collectedMoney);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Golds"))
+        {
+            poolingManager.UsemoneyText().GetComponent<PoolingObjectController>().UseObject(transform.position +new Vector3(0,2,2));
+            other.gameObject.SetActive(false);
+            collectedMoney += levelManager.goldValue;
+        }
+
+        if (other.CompareTag("Box"))
+        {
+            EndGameEvents();
+        }
+
+        if (other.CompareTag("LevelEnd"))
+        {
+            EndGameEvents();
+        }
     }
 }

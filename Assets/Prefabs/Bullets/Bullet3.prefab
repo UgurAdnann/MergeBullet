@@ -53,8 +53,11 @@ MonoBehaviour:
   hp: 0
   pos: {x: 0, y: 0}
   isUnbeatable: 0
+  isGameBullet: 0
+  isGunBullet: 0
   currentGridController: {fileID: 0}
   targetGridController: {fileID: 0}
+  bulletSpeed: 0
 --- !u!136 &5833575722623850915
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -65,10 +68,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.19864897
+  m_Radius: 0.2635212
   m_Height: 0.7200083
   m_Direction: 1
-  m_Center: {x: -0.010671213, y: -0.095359474, z: 0}
+  m_Center: {x: 0.0066280365, y: -0.095359474, z: 0}
 --- !u!54 &4812434978916525728
 Rigidbody:
   m_ObjectHideFlags: 0

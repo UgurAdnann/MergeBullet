@@ -36,7 +36,7 @@ public class CharacterManager : MonoBehaviour
 
     private void CheckAnim()
     {
-        if (isPlay)
+        if (playerManager.isCanMove && isPlay)
         {
             if (Input.GetMouseButtonDown(0))
                 animator.SetBool("Run", true);

@@ -59,7 +59,7 @@ MonoBehaviour:
   tempBulletController: {fileID: 0}
   levelManager: {fileID: 0}
   addBulletSize: 0
-  minBulletSize: 0.5
+  minBulletSize: 1
   maxBulletSize: 5.5
   positiveTextBGMat: {fileID: 2100000, guid: b3cccfbb953725c4184c88574b2e2aa1, type: 2}
   negativeTextBGMat: {fileID: 2100000, guid: 97043ae9c1ab2004993f7127b113c4a3, type: 2}

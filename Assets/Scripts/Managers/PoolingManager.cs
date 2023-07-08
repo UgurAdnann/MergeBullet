@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
 {
-    public GameObject cubeDestroyFx,bulletDestroyFx,bullet;
+    public GameObject cubeDestroyFx,bulletDestroyFx,bullet,moneyText;
+    private GameObject tempCubeDestroyFx, tempBulletDestroyFx,tempBullet,tempMoneyText;
+
     public Queue<GameObject> cubeDestroyFxQue = new Queue<GameObject>();
     public Queue<GameObject> bulletDestroyFxQue = new Queue<GameObject>();
     public Queue<GameObject> bulletQue = new Queue<GameObject>();
-    public int cubeDestroyFxCount, bulletDestroyFxCount,bulletCount;
-    private GameObject tempCubeDestroyFx, tempBulletDestroyFx,tempBullet;
+    public Queue<GameObject> moneyTextQue = new Queue<GameObject>();
+
+    public int cubeDestroyFxCount, bulletDestroyFxCount,bulletCount,moneyTextCount;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class PoolingManager : MonoBehaviour
         CubeFxPooling();
         BulletFxPooling();
         BulletPooling();
+        MoneyTextPooling();
     }
 
     #region CubePoolingEvents
@@ -108,5 +112,33 @@ public class PoolingManager : MonoBehaviour
         bulletQue.Enqueue(go);
     }
 
+    #endregion
+
+    #region MoneyPoolingEvents
+    private void MoneyTextPooling()
+    {
+        for (int i = 0; i < cubeDestroyFxCount; i++)
+        {
+            tempMoneyText = Instantiate(moneyText);
+            tempMoneyText.transform.SetParent(transform.GetChild(3)); //CubeDestroyFx Parent
+            tempMoneyText.transform.localPosition = Vector3.zero;
+            tempMoneyText.GetComponent<PoolingObjectController>().poolingType = PoolingType.MoneyText;
+            moneyTextQue.Enqueue(tempMoneyText);
+        }
+    }
+
+    public GameObject UsemoneyText()
+    {
+        if (moneyTextQue.Count <= 1)
+            MoneyTextPooling();
+        return moneyTextQue.Dequeue();
+    }
+
+    public void replacingMoneyText(GameObject go)
+    {
+        go.SetActive(false);
+        go.transform.localPosition = Vector3.zero;
+        moneyTextQue.Enqueue(go);
+    }
     #endregion
 }

@@ -17,6 +17,7 @@ public class BoxController : MonoBehaviour
     private BulletController currentBulletController;
     private GameObject boxFx;
     private Vector3 startScale;
+    public Rigidbody golds;
     #endregion
 
     void Start()
@@ -36,6 +37,7 @@ public class BoxController : MonoBehaviour
 
     private void hitAnim()
     {
+        DOTween.Complete(this);
         transform.DOScale(startScale * 1.2f, 0.05f).OnStepComplete(() => transform.DOScale(startScale, 0.05f));
     }
 
@@ -45,6 +47,7 @@ public class BoxController : MonoBehaviour
         {
             transform.GetComponent<Collider>().enabled = false;
             transform.GetComponent<MeshRenderer>().enabled = false;
+            golds.isKinematic = false;
             boxFx = poolingManager.useCubeDestroyFx();
             boxFx.transform.localScale *= 3;
             boxFx.GetComponent<PoolingObjectController>().UseObject(transform.position);

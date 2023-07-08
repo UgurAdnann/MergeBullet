@@ -24,6 +24,7 @@ public class BulletController : MonoBehaviour
     [HideInInspector] public GridController currentGridController, targetGridController;
     public float bulletSpeed;
     Coroutine StopBullet = null;
+    private float previousXPos, previousZPos, nextXPos, nextZPos;
     #endregion
 
     private void Start()
@@ -53,6 +54,8 @@ public class BulletController : MonoBehaviour
     {
         MoveObject();
         Fire();
+        if (isLeftTripleFire || isRightTripleFire)
+            SetRot();
     }
 
     #region Movement
@@ -103,7 +106,7 @@ public class BulletController : MonoBehaviour
         }
         else
         {
-            if (bulletType.Equals(targetGridController.bulletType)) //Merge
+            if (bulletType.Equals(targetGridController.bulletType) && targetGridController.gameObject != currentGridController.gameObject) //Merge
             {
                 targetBulletController = targetGridController.transform.GetChild(0).GetComponent<BulletController>();
                 if (bulletType < gameManager.levelEditor.bulletDatas.Length)
@@ -148,14 +151,30 @@ public class BulletController : MonoBehaviour
     private void Fire()
     {
         if (isForwardFire)
-            transform.Translate(transform.forward * -bulletSpeed * Time.deltaTime);
+            transform.position += (Vector3.forward * bulletSpeed * Time.deltaTime);
 
         else if (isRightTripleFire)
-            transform.Translate(Vector3.Normalize(transform.forward + transform.right * 0.2f) * -bulletSpeed * Time.deltaTime);
+        {
+            transform.position += ((Vector3.forward + Vector3.right * 0.3f) * bulletSpeed * Time.deltaTime);
+        }
         else if (isLeftTripleFire)
-            transform.Translate(Vector3.Normalize(transform.forward - transform.right * 0.2f) * -bulletSpeed * Time.deltaTime);
+        {
+            transform.position += ((Vector3.forward - Vector3.right * 0.3f) * bulletSpeed * Time.deltaTime);
+        }
 
     }
+
+    public void SetRot() //Updatede çalýþacak
+    {
+        previousXPos = transform.position.x;
+        previousZPos = transform.position.z;
+
+        transform.forward = Vector3.Lerp(transform.forward, new Vector3(previousXPos - nextXPos, 0, previousZPos - nextZPos), 15);
+
+        nextXPos = transform.position.x;
+        nextZPos = transform.position.z;
+    }
+
     #endregion
 
     #region Collision

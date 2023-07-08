@@ -25,16 +25,6 @@ public class CanvasManager : MonoBehaviour
     private BulletController bulletController;
     #endregion
 
-    private void OnEnable()
-    {
-        EventManager.SetMoneyText += SetMoneyText;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.SetMoneyText -= SetMoneyText;
-    }
-
 
     private void Start()
     {

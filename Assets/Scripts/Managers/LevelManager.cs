@@ -39,15 +39,25 @@ public class LevelManager : MonoBehaviour
 
     //Box
     public Transform boxsParent;
-    public int boxNum, boxDistance,boxHp;
+    public int boxNum, boxDistance, boxHp;
     public GameObject boxPrefab;
     private GameObject currenBox;
     private float boxXPos;
+    public int goldValue;
+
+    //High Score
+    public GameObject highScoreObject, levelEndObj;
+    #endregion
+
+    #region Variables for Win Events
+    public GameObject WinPanel;
+    public TMPro.TextMeshProUGUI moneyText;
     #endregion
 
     private void Awake()
     {
         ObjectManager.LevelManager = this;
+        DOTween.SetTweensCapacity(500, 50);
     }
 
     private void Start()
@@ -62,7 +72,10 @@ public class LevelManager : MonoBehaviour
     {
         DataManager.SaveData(dataBase);
         if (gameManager.bullets.Count > 0)
+        {
+            DOTween.KillAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
 
     }
 
@@ -113,6 +126,7 @@ public class LevelManager : MonoBehaviour
         playerStartPos = playerPos;
         SetDoors();
         SetBoxes();
+        SetHighScore();
     }
 
     private void SetDoors()
@@ -146,14 +160,38 @@ public class LevelManager : MonoBehaviour
 
                 if (j == 0)
                     boxXPos = -3.5f;
-                else if(j==1)
+                else if (j == 1)
                     boxXPos = 0;
                 else
                     boxXPos = 3.5f;
-                currenBox.transform.position = new Vector3(boxXPos, 2.55f, finishLine.transform.position.z+ boxDistance + boxDistance * i);
+                currenBox.transform.position = new Vector3(boxXPos, 2.55f, finishLine.transform.position.z + boxDistance + boxDistance * i);
             }
         }
+        levelEndObj.transform.position = new Vector3(0, 0.5f, currenBox.transform.position.z + boxDistance * 3);
         plane.localScale = new Vector3(plane.localScale.x, plane.localScale.y, currenBox.transform.position.z + 100);
     }
+
+    private void SetHighScore()
+    {
+        if (dataBase.highScore != 0)
+        {
+            highScoreObject.transform.position = new Vector3(-5, 0, dataBase.highScore);
+            highScoreObject.SetActive(true);
+        }
+    }
     #endregion
+
+    public void OpenWinPanel(int money)
+    {
+        dataBase.money += money;
+        moneyText.text = "$" + money.ToString();
+        WinPanel.SetActive(true);
+        WinPanel.transform.DOScale(Vector3.one, 0.3f);
+    }
+
+    public void OpenMergeScene()
+    {
+        DataManager.SaveData(dataBase);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
 }

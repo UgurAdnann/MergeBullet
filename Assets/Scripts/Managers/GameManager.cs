@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey("data");
             dataBase.bulletSaves.Clear();
             dataBase.money = levelEditor.StartMoney;
+            dataBase.highScore = 0;
             DataManager.SaveData(dataBase);
         }
     }

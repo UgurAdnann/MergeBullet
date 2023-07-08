@@ -12,6 +12,9 @@ TagManager:
   - Character
   - Door
   - BulletRange
+  - Golds
+  - Box
+  - LevelEnd
   layers:
   - Default
   - TransparentFX
@@ -19,8 +22,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - BulletRange
+  - Box
   - 
   - 
   - 
