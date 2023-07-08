@@ -64,8 +64,8 @@ public class DoorController : MonoBehaviour
         valueText.transform.DOScale(startSize * 1.5f, 0.05f).OnStepComplete(() => valueText.transform.DOScale(startSize, 0.05f));
     }
 
-    public void CloseCollider()
+    public void CloseDoor()
     {
-        GetComponent<Collider>().enabled = false;
+        gameObject.SetActive(false);
     }
 }

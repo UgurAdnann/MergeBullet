@@ -48,7 +48,7 @@ public class DoorFireRate : DoorController
 
         if (other.CompareTag("Player"))
         {
-            CloseCollider();
+            CloseDoor();
 
             //Change BulletRange
             levelManager.fireRate -=  (addFireRate / 1000);

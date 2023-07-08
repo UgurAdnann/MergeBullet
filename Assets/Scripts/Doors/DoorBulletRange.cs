@@ -45,7 +45,7 @@ public class DoorBulletRange : DoorController
 
         if (other.CompareTag("Player"))
         {
-            CloseCollider();
+            CloseDoor();
 
             //Change BulletRange
             bulletRangeSettings.transform.localPosition += Vector3.forward * (addRange / 10);

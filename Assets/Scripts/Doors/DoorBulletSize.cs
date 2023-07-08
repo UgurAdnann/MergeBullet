@@ -53,10 +53,10 @@ public class DoorBulletSize : DoorController
 
         if (other.CompareTag("Player"))
         {
-            CloseCollider();
+            CloseDoor();
 
             //Change BulletSize
-            levelManager.bulletSize += (addBulletSize / 1000);
+            levelManager.bulletSize += (addBulletSize / 100);
           
             //Set  BulletSize Border
             if (levelManager.bulletSize < minBulletSize)

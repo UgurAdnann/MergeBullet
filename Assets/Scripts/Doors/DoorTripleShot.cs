@@ -22,7 +22,7 @@ public class DoorTripleShot : DoorController
     {
         if (other.CompareTag("Player"))
         {
-            CloseCollider();
+            CloseDoor();
          
             playerManager.isTripleShot = true;
         }

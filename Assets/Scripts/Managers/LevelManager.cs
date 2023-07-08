@@ -26,15 +26,23 @@ public class LevelManager : MonoBehaviour
     #endregion
 
     #region Variables for Level Design
-   [HideInInspector] public Vector3 playerStartPos;
+    [HideInInspector] public Vector3 playerStartPos;
+    public GameObject finishLine;
+    public Transform plane;
 
-    public int boxNum, boxDistance;
-
+    //Door
+    public Transform doorsParent;
     public int doorNum, doorDistance;
-    private int doorRndPos,rndDoor;
+    private int doorRndPos, rndDoor;
     public GameObject[] doors;
     private GameObject currentDoor;
-    public GameObject finishLine;
+
+    //Box
+    public Transform boxsParent;
+    public int boxNum, boxDistance,boxHp;
+    public GameObject boxPrefab;
+    private GameObject currenBox;
+    private float boxXPos;
     #endregion
 
     private void Awake()
@@ -104,6 +112,7 @@ public class LevelManager : MonoBehaviour
     {
         playerStartPos = playerPos;
         SetDoors();
+        SetBoxes();
     }
 
     private void SetDoors()
@@ -111,18 +120,40 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < doorNum; i++)
         {
             rndDoor = Random.Range(0, doors.Length);
-            currentDoor = Instantiate( doors[rndDoor]);
+            currentDoor = Instantiate(doors[rndDoor]);
+            currentDoor.transform.SetParent(doorsParent);
 
             doorRndPos = Random.Range(0, 2);
 
             if (doorRndPos == 0) //Put Left
-                currentDoor.transform.position = new Vector3(-2.5f, -2.25f, playerStartPos.z+doorDistance + (i * doorDistance));
+                currentDoor.transform.position = new Vector3(-2.5f, -2.25f, playerStartPos.z + doorDistance + (i * doorDistance));
             if (doorRndPos == 1) //Put Right
-                currentDoor.transform.position = new Vector3(2.5f, -2.25f, playerStartPos.z+doorDistance + (i * doorDistance));
+                currentDoor.transform.position = new Vector3(2.5f, -2.25f, playerStartPos.z + doorDistance + (i * doorDistance));
         }
 
-        finishLine.transform.position = new Vector3(0, 0.5f, currentDoor.transform.position.z + doorDistance); 
+        finishLine.transform.position = new Vector3(0, 0.5f, currentDoor.transform.position.z + doorDistance);
     }
 
+    private void SetBoxes()
+    {
+        for (int i = 0; i < boxNum; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                currenBox = Instantiate(boxPrefab);
+                currenBox.transform.SetParent(boxsParent);
+                currenBox.GetComponent<BoxController>().hp = boxHp + boxHp * i;
+
+                if (j == 0)
+                    boxXPos = -3.5f;
+                else if(j==1)
+                    boxXPos = 0;
+                else
+                    boxXPos = 3.5f;
+                currenBox.transform.position = new Vector3(boxXPos, 2.55f, finishLine.transform.position.z+ boxDistance + boxDistance * i);
+            }
+        }
+        plane.localScale = new Vector3(plane.localScale.x, plane.localScale.y, currenBox.transform.position.z + 100);
+    }
     #endregion
 }
