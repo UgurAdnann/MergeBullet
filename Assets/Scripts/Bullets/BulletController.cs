@@ -54,7 +54,7 @@ public class BulletController : MonoBehaviour
     {
         MoveObject();
         Fire();
-        if (isLeftTripleFire || isRightTripleFire)
+        if (isLeftTripleFire || isRightTripleFire || isForwardFire)
             SetRot();
     }
 

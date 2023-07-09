@@ -58,7 +58,7 @@ MonoBehaviour:
   isGunBullet: 1
   currentGridController: {fileID: 0}
   targetGridController: {fileID: 0}
-  bulletSpeed: 20
+  bulletSpeed: 30
 --- !u!136 &8230071638918265658
 CapsuleCollider:
   m_ObjectHideFlags: 0
