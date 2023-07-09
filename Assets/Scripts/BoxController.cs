@@ -49,7 +49,7 @@ public class BoxController : MonoBehaviour
             transform.GetComponent<MeshRenderer>().enabled = false;
             golds.isKinematic = false;
             boxFx = poolingManager.useCubeDestroyFx();
-            boxFx.transform.localScale *= 3;
+            boxFx.transform.localScale =Vector3.one*3;
             boxFx.GetComponent<PoolingObjectController>().UseObject(transform.position);
             hpText.gameObject.SetActive(false);
         }

@@ -2631,7 +2631,7 @@ MonoBehaviour:
   forwardSpeed: 0
   sideSpeed: 0
   isStartPanelClose: 0
-  initialSideSpeed: 10
+  initialSideSpeed: 18
   initialForwardSpeed: 10
   isTripleShot: 0
   collectedMoney: 0

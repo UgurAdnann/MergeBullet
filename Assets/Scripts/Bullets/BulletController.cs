@@ -111,6 +111,8 @@ public class BulletController : MonoBehaviour
                 targetBulletController = targetGridController.transform.GetChild(0).GetComponent<BulletController>();
                 if (bulletType < gameManager.levelEditor.bulletDatas.Length)
                     gameManager.Merge(this, targetBulletController);
+                else
+                    transform.localPosition = Vector3.zero;
             }
             else //Move Ýnitial Place
                 transform.localPosition = Vector3.zero;
@@ -161,7 +163,15 @@ public class BulletController : MonoBehaviour
         {
             transform.position += ((Vector3.forward - Vector3.right * 0.3f) * bulletSpeed * Time.deltaTime);
         }
+        StartCoroutine(WaitOpenBullet());
 
+    }
+
+    IEnumerator WaitOpenBullet()
+    {
+        yield return new WaitForSeconds(0.15f);
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void SetRot() //Updatede çalýþacak

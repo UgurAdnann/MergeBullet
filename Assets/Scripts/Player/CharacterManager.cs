@@ -49,20 +49,17 @@ public class CharacterManager : MonoBehaviour
     {
         if (playerManager.isTouch && isPlay)
         {
-            tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
-            tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+            CreateBullet();
             tempbulletController.ForwardMovement(hitValue);
 
             if (playerManager.isTripleShot)
             {
                 //Right Bullet
-                tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
-                tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+                CreateBullet();
                 tempbulletController.TripleRightMovement(hitValue);
 
                 //LeftBullet Bullet
-                tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
-                tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+                CreateBullet();
                 tempbulletController.TripleLeftMovement(hitValue);
 
             }
@@ -72,5 +69,13 @@ public class CharacterManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.05f);
         StartCoroutine(WaitFire());
+    }
+
+    private void CreateBullet()
+    {
+        tempbulletController = poolingManager.UseBullet().GetComponent<BulletController>();
+        tempbulletController.GetComponent<PoolingObjectController>().UseObject(firePoint.position);
+        tempbulletController.transform.GetChild(0).gameObject.SetActive(false);
+        tempbulletController.transform.GetChild(1).gameObject.SetActive(false);
     }
 }
