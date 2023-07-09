@@ -169,7 +169,7 @@ public class BulletController : MonoBehaviour
 
     IEnumerator WaitOpenBullet()
     {
-        yield return new WaitForSeconds(0.12f);
+        yield return new WaitForSeconds(0.15f);
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(true);
     }
