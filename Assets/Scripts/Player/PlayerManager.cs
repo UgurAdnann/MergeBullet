@@ -100,7 +100,8 @@ public class PlayerManager : MonoBehaviour
         {
             transform.GetChild(0).GetChild(i).GetComponent<Animator>().SetBool("Run", false);
         }
-        dataBase.highScore = transform.position.z;
+        if (transform.position.z > dataBase.highScore)
+            dataBase.highScore = transform.position.z;
         levelManager.OpenWinPanel(collectedMoney);
     }
 
@@ -109,7 +110,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (other.CompareTag("Golds"))
         {
-            poolingManager.UsemoneyText().GetComponent<PoolingObjectController>().UseObject(transform.position +new Vector3(0,2,2));
+            poolingManager.UsemoneyText().GetComponent<PoolingObjectController>().UseObject(transform.position + new Vector3(0, 2, 2));
             other.gameObject.SetActive(false);
             collectedMoney += levelManager.goldValue;
         }
